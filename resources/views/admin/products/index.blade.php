@@ -22,7 +22,7 @@
                         @foreach ( $data as $products )
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $products['categories']}}</td>
+                                <td>{{ $products['category']}}</td>
                                 <td>{{ $products['name']}}</td>
                                 <td>{{ $products['price']}}</td>
                                 <td>{{ $products['sale_price']}}</td>
