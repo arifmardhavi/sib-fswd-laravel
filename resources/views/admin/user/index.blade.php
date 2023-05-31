@@ -4,6 +4,7 @@
 <main>
     <div class="container-fluid px-4">
         <h1 class="my-4">User</h1>
+        <a href="{{route('user.create')}}" class="btn btn-primary mb-2" >Create New</a>
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -19,27 +20,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ( $data as $user )
+                        @foreach ( $users as $user )
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>
                                     <img src="https://dummyimage.com/100x100/dee2e6/6c757d.jpg" alt="avatar">
                                 </td>
                                 <td>
-                                    {{ $user['name'] }}
+                                    {{ $user->name }}
                                 </td>
                                 <td>
-                                    {{ $user['email'] }}
+                                    {{ $user->email }}
                                 </td>
                                 <td>
-                                    {{ $user['phone'] }}
+                                    {{ $user->phone }}
                                 </td>
                                 <td>
-                                    {{ $user['role'] }}
+                                    {{ $user->role->name }}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-warning" >edit</a>
-                                    <a href="#" class="btn btn-danger"> delete</a>
+                                    <form onsubmit="return confirm('Are you sure? ');" action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                        <a href="{{ route('user.edit', $user->id ) }}" class="btn btn-warning" >edit</a>
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

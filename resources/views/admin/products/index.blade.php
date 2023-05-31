@@ -4,6 +4,7 @@
 <main>
     <div class="container-fluid px-4">
         <h1 class="my-4">Products</h1>
+        <a href="{{ route('products.create')}}" class="btn btn-primary mb-2" >Create New</a>
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -19,17 +20,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ( $data as $products )
+                        @foreach ( $products as $product )
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $products['category']}}</td>
-                                <td>{{ $products['name']}}</td>
-                                <td>{{ $products['price']}}</td>
-                                <td>{{ $products['sale_price']}}</td>
-                                <td>{{ $products['brands']}}</td>
+                                <td>{{ $product->category->name}}</td>
+                                <td>{{ $product->name}}</td>
+                                <td>Rp {{ number_format($product->price, 0, 2) }}</td>
+                                <td>Rp {{ number_format($product->sale_price, 0, 2) }}</td>
+                                <td>{{ $product->brands}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-warning" >edit</a>
-                                    <a href="#" class="btn btn-danger"> delete</a>
+                                    <form onsubmit="return confirm('Are you sure? ');" action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                        <a href="{{ route('products.edit', $product->id ) }}" class="btn btn-warning" >edit</a>
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

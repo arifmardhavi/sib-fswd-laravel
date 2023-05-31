@@ -4,6 +4,7 @@
 <main>
     <div class="container-fluid px-4">
         <h1 class="my-4">Categories</h1>
+        <a href="{{ route('categories.create') }}" class="btn btn-primary mb-2" >Create New</a>
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -20,8 +21,14 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $categories['name'] }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-warning" >edit</a>
-                                    <a href="#" class="btn btn-danger"> delete</a>
+                                    <form onsubmit="return confirm('Are you sure? ');" action="{{ route('categories.destroy', $categories->id) }}" method="POST">
+                                        <a href="{{route('categories.edit', $categories->id)}}" class="btn btn-warning" >edit</a>
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
