@@ -38,7 +38,7 @@
                             <span class="badge bg-light text-dark ms-1 rounded-pill">0</span>
                         </button>
 
-                        <a href="{{ route('dashboard') }}" class="btn btn-outline-light ms-1">
+                        <a href="{{ route('login') }}" class="btn btn-outline-light ms-1">
                             <i class="bi-person-fill me-1"></i>
                             Login
                         </a>
