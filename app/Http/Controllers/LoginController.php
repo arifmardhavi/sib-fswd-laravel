@@ -23,6 +23,10 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
 

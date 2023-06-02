@@ -57,12 +57,18 @@
                             @csrf
 
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="floatingInput" value="{{ old('email') }}" name="email" placeholder="name@example.com" required>
                                 <label for="floatingInput">Email address</label>
+                                @error('email')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="floatingPassword" name="password" placeholder="Password" required>
                                 <label for="floatingPassword">Password</label>
+                                @error('password')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="form-check mb-3">

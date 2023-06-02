@@ -3,7 +3,7 @@
         <div class="nav">
             @if (Auth::user()->role->name == 'Admin' || Auth::user()->role->name == 'Staff')
                 <div class="sb-sidenav-menu-heading">Core</div>
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{route('dashboard')}}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>

@@ -49,22 +49,34 @@
                         <form action="{{ route('register.store') }}" method="POST">
                             @csrf
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="name">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="floatingInput" name="name">
                                 <label for="floatingInput">Name</label>
+                                @error('name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="phone">
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="floatingInput" name="phone">
                                 <label for="floatingInput">Phone</label>
+                                @error('phone')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" name="email">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="floatingInput" name="email">
                                 <label for="floatingInput">Email address</label>
+                                @error('email')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" name="password">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="floatingPassword" name="password">
                                 <label for="floatingPassword">Password</label>
+                                @error('password')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                             <div class="d-grid">
