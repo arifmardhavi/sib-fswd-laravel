@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SliderController;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Role;
@@ -22,9 +24,8 @@ use App\Models\Role;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/product/show/{id}', [ProductsController::class, 'show'])->name('products.show');
 
 Route::get('/register', [RegisterController::class ,'index'])->name('register');
 Route::post('/register', [RegisterController::class ,'store'])->name('register.store');
@@ -59,6 +60,15 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('role:Admin')->group(function () {
+
+        // Slider
+        Route::get('/sliders', [SliderController::class, 'index'])->name('slider.index');
+        Route::get('/sliders/create', [SliderController::class, 'create'])->name('slider.create');
+        Route::post('/sliders', [SliderController::class, 'store'])->name('slider.store');
+        Route::get('/sliders/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
+        Route::put('/sliders/{id}', [SliderController::class, 'update'])->name('slider.update');
+        Route::delete('/sliders/{id}', [SliderController::class, 'destroy'])->name('slider.destroy');
+
         // Role
         Route::get('/role', [RoleController::class ,'index'])->name('role.index');
         Route::get('/role/create', [RoleController::class ,'create'])->name('role.create');

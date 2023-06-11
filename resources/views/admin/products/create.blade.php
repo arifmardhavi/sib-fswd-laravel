@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-body">
 
-                    <form action="{{ route('products.store')}}" method="POST">
+                    <form action="{{ route('products.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3 align-items-center">
                             <div class="mb-3">
@@ -56,6 +56,13 @@
                                 @error('brand')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Product Image</label>
+                                <input class="form-control @error('image') is-invalid @enderror" type="file" name="image" id="image" accept=".jpg, .jpeg, .png., .webp">
+                                @error('image')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

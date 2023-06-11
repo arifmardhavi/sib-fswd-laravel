@@ -11,6 +11,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Image</th>
                             <th>Category</th>
                             <th>Name</th>
                             <th>Price</th>
@@ -23,6 +24,16 @@
                         @foreach ( $products as $product )
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <center>
+                                        @if ($product->image == null)
+                                            <span class="badge bg-primary">No Image</span>
+                                        @else
+                                            <img src="{{ asset('storage/product/' . $product->image) }}" class="img-fluid" style="max-width: 100px;" alt="{{ $product->image }}">
+                                        @endif
+                                    </center>
+
+                                </td>
                                 <td>{{ $product->category->name}}</td>
                                 <td>{{ $product->name}}</td>
                                 <td>Rp {{ number_format($product->price, 0, 2) }}</td>
